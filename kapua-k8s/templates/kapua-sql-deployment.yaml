@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.13.0 (84fa826)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: kapua-sql
+  name: kapua-sql
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: kapua-sql
+    spec:
+      containers:
+      - image: 2.3.255.240:80/iot/kapua-sql:0.3.1
+        name: kapua-sql
+        resources: {}
+      restartPolicy: Always
+status: {}

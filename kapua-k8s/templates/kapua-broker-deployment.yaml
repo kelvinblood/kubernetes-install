@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.13.0 (84fa826)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: kapua-broker
+  name: kapua-broker
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: kapua-broker
+    spec:
+      containers:
+      - env:
+        - name: DB_PORT_3306_TCP_PORT
+          value: "3306"
+        - name: commons.db.schema.update
+          value: "true"
+        image: 2.3.255.240:80/iot/kapua-broker:0.3.1
+        name: kapua-broker
+        ports:
+        - containerPort: 1883
+        - containerPort: 61614
+        resources: {}
+      restartPolicy: Always
+status: {}

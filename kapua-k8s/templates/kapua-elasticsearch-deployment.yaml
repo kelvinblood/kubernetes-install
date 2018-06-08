@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.13.0 (84fa826)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: kapua-elasticsearch
+  name: kapua-elasticsearch
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: kapua-elasticsearch
+    spec:
+      containers:
+      - args:
+        - -Ecluster.name=kapua-datastore
+        - -Ediscovery.type=single-node
+        - -Etransport.host=_site_
+        - -Etransport.ping_schedule=-1
+        - -Etransport.tcp.connect_timeout=30s
+        image: 2.3.255.240:80/iot/elasticsearch:5.4.0
+        name: kapua-elasticsearch
+        resources: {}
+      restartPolicy: Always
+status: {}

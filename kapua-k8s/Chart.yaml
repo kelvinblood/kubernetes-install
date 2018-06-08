@@ -1,0 +1,11 @@
+apiVersion: v1
+name: kapua-k8s
+description: kapua
+version: 0.0.1
+home: https://kelu.org
+sources:
+- https://kelu.org
+maintainers:
+- name: kelu
+  email: admin@kelu.org
+icon: https://cdn.kelu.org/kelu.jpg

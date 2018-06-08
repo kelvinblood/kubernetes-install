@@ -1,0 +1,52 @@
+version: '2'
+services:
+  kapua-sql:
+    image: 10.18.1.230:80/iot/kapua-sql:0.3.1
+    restart: always
+
+  kapua-elasticsearch:
+    image: 10.18.1.230:80/iot/elasticsearch:5.4.0
+    restart: always
+    command:
+    - -Ecluster.name=kapua-datastore
+    - -Ediscovery.type=single-node
+    - -Etransport.host=_site_
+    - -Etransport.ping_schedule=-1
+    - -Etransport.tcp.connect_timeout=30s
+
+  kapua-broker:
+    image: 10.18.1.230:80/iot/kapua-broker:0.3.1
+    restart: always
+    links:
+      - kapua-sql:db
+      - kapua-elasticsearch:es
+    environment:
+      - commons.db.schema.update=true
+      - DB_PORT_3306_TCP_PORT=3306
+    ports:
+      - "1883:1883"
+      - "61614:61614"
+
+  kapua-console:
+    image: 10.18.1.230:80/iot/kapua-console:0.3.1
+    restart: always
+    links:
+      - kapua-sql:db
+      - kapua-elasticsearch:es
+      - kapua-broker:broker
+    environment:
+      - commons.db.schema.update=true
+    ports:
+      - "8080:8080"
+
+  kapua-api:
+    image: 10.18.1.230:80/iot/kapua-api:0.3.1
+    restart: always
+    links:
+      - kapua-sql:db
+      - kapua-elasticsearch:es
+      - kapua-broker:broker
+    environment:
+      - commons.db.schema.update=true
+    ports:
+      - "8080:8080"

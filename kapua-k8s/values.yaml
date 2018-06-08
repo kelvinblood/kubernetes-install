@@ -1,0 +1,14 @@
+harbor:
+  addr: "10.18.1.230:/"
+
+sql:
+  replicaCount: 1
+  image:
+    repository: iot/kapua-sql
+    tag: 0.3.1
+    pullPolicy: Always
+  service:
+    name: kapua-sql
+    type: NodePort
+    internalPort: 3306
+    annotations: {}

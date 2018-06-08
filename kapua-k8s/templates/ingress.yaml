@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: xiaozhi-ingress
+  labels:
+    app: kapua
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: xiaozhi.caih.local
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: kapua-console
+              servicePort: 8080
