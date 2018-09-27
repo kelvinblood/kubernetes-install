@@ -1,3 +1,4 @@
 charts/
 .idea/
 kapua-kubernetes.iml
+*~
