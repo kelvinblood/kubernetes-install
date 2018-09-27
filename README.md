@@ -1,2 +1,1 @@
-# kapua-kubernetes
-kapua-kubernetes
+# docker-ce-17.06 for centos 7.3
