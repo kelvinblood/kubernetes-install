@@ -17,7 +17,7 @@ cdir="$(cd "$(dirname "$0")" && pwd)"
 
 # binary
 wget https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-17.06.2.ce-1.el7.centos.x86_64.rpm
-sudo yum install docker-ce-17.06.2.ce-1.el7.centos.x86_64.rpm
+sudo yum install -y docker-ce-17.06.2.ce-1.el7.centos.x86_64.rpm
 
 # daemon.json
 mkdir -p /etc/docker
