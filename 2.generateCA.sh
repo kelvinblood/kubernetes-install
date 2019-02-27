@@ -72,9 +72,9 @@ cat >config.json <<EOF
     "CN": "etcd-0",
     "hosts": [
         "localhost",
-        "10.19.0.60",
-        "10.19.0.54",
-        "10.19.0.53"
+        "__ETCD_REPLACE_IP_1__",
+        "__ETCD_REPLACE_IP_2__",
+        "__ETCD_REPLACE_IP_3__"
     ],
     "key": {
         "algo": "ecdsa",

@@ -18,12 +18,12 @@ ExecStart=/usr/bin/etcd \
   --peer-key-file=/app/allblue/etcd/ssl/peer-key.pem  \
   --trusted-ca-file=/app/allblue/etcd/ssl/ca.pem  \
   --peer-trusted-ca-file=/app/allblue/etcd/ssl/ca.pem  \
-  --initial-advertise-peer-urls https://10.19.0.53:2380  \
-  --listen-peer-urls https://10.19.0.53:2380  \
-  --listen-client-urls https://10.19.0.53:2379,http://127.0.0.1:2379  \
-  --advertise-client-urls https://10.19.0.53:2379  \
+  --initial-advertise-peer-urls https://__ETCD_REPLACE_IP_3__:2380  \
+  --listen-peer-urls https://__ETCD_REPLACE_IP_3__:2380  \
+  --listen-client-urls https://__ETCD_REPLACE_IP_3__:2379,http://127.0.0.1:2379  \
+  --advertise-client-urls https://__ETCD_REPLACE_IP_3__:2379  \
   --initial-cluster-token etcd-cluster-0  \
-  --initial-cluster node01=https://10.19.0.60:2380,node02=https://10.19.0.54:2380,node03=https://10.19.0.53:2380  \
+  --initial-cluster node01=https://__ETCD_REPLACE_IP_1__:2380,node02=https://__ETCD_REPLACE_IP_2__:2380,node03=https://__ETCD_REPLACE_IP_3__:2380  \
   --initial-cluster-state new  \
   --data-dir=/app/allblue/etcddata
 Restart=on-failure
