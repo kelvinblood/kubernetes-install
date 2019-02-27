@@ -1,0 +1,34 @@
+[Unit]
+Description=Etcd Server
+After=network.target
+After=network-online.target
+Wants=network-online.target
+Documentation=https://github.com/coreos
+
+[Service]
+Type=notify
+WorkingDirectory=/app/allblue/etcddata/
+EnvironmentFile=/app/allblue/etcd/etcd.conf
+User=root
+ExecStart=/usr/bin/etcd \
+  --name node02  \
+  --cert-file=/app/allblue/etcd/ssl/server.pem  \
+  --key-file=/app/allblue/etcd/ssl/server-key.pem  \
+  --peer-cert-file=/app/allblue/etcd/ssl/peer.pem  \
+  --peer-key-file=/app/allblue/etcd/ssl/peer-key.pem  \
+  --trusted-ca-file=/app/allblue/etcd/ssl/ca.pem  \
+  --peer-trusted-ca-file=/app/allblue/etcd/ssl/ca.pem  \
+  --initial-advertise-peer-urls https://10.19.0.54:2380  \
+  --listen-peer-urls https://10.19.0.54:2380  \
+  --listen-client-urls https://10.19.0.54:2379,http://127.0.0.1:2379  \
+  --advertise-client-urls https://10.19.0.54:2379  \
+  --initial-cluster-token etcd-cluster-0  \
+  --initial-cluster node01=https://10.19.0.60:2380,node02=https://10.19.0.54:2380,node03=https://10.19.0.53:2380  \
+  --initial-cluster-state new  \
+  --data-dir=/app/allblue/etcddata
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
