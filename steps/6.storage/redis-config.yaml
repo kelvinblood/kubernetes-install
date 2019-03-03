@@ -28,7 +28,7 @@ image:
 
 ## Cluster settings
 cluster:
-  enabled: true
+  enabled: false
   slaveCount: 1
 
 networkPolicy:
