@@ -1,0 +1,19 @@
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: demo1-ippool
+spec:
+  cidr: 10.92.0.0/24
+  ipipMode: Never
+  natOutgoing: false
+  disabled: false
+---
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  name: demo2-ippool
+spec:
+  cidr: 10.92.1.0/24
+  ipipMode: Never
+  natOutgoing: false
+  disabled: false

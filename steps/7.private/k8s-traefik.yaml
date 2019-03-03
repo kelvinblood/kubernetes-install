@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kelu-dashboard
+  namespace: kube-system
+  labels:
+    app: kellu
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.frontend.rule.type: "PathPrefixStrip"
+spec:
+  rules:
+    - host: "53.kelu.org"
+      http:
+        paths:
+          - path: /k8s/
+            backend:
+              serviceName: kubernetes-dashboard-external
+              servicePort: 9090

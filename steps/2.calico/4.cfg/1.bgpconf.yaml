@@ -1,0 +1,8 @@
+apiVersion: projectcalico.org/v3
+kind: BGPConfiguration
+metadata:
+  name: default
+spec:
+  asNumber: 63400
+  logSeverityScreen: Info
+  nodeToNodeMeshEnabled: false
