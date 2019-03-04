@@ -4,6 +4,11 @@ set -e;
 
 systemctl stop firewalld && systemctl disable firewalld
 setenforce 0
+
+swapoff -a && cat >> /etc/sysctl.conf << EOF 
+vm.swappiness=0
+EOF
+
 # vi /etc/selinux/config 
 # # SELINUX=disabled
 
@@ -20,13 +25,6 @@ systemctl restart docker
 
 yum install -y src/*
 
-cp cfg/10-kubeadm.conf /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+cp -f cfg/10-kubeadm.conf /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
 systemctl enable kubelet && systemctl start kubelet
-
-dd  if=/dev/zero of=/swapfile bs=100M count=10;
-mkswap  /swapfile;
-swapon /swapfile;
-cat >> /etc/rc.local << EOF
-swapon /swapfile
-EOF
