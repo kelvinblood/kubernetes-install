@@ -7,17 +7,19 @@ Documentation=https://github.com/coreos
 
 [Service]
 Type=notify
-WorkingDirectory=/app/etcd/etcddata/
-EnvironmentFile=/app/etcd/etcd/etcd.conf
+WorkingDirectory=/app/kelu/etcddata/
+EnvironmentFile=/app/kelu/etcd/etcd.conf
 User=root
 ExecStart=/usr/bin/etcd \
   --name node02  \
-  --cert-file=/app/etcd/etcd/ssl/server.pem  \
-  --key-file=/app/etcd/etcd/ssl/server-key.pem  \
-  --peer-cert-file=/app/etcd/etcd/ssl/peer.pem  \
-  --peer-key-file=/app/etcd/etcd/ssl/peer-key.pem  \
-  --trusted-ca-file=/app/etcd/etcd/ssl/ca.pem  \
-  --peer-trusted-ca-file=/app/etcd/etcd/ssl/ca.pem  \
+  --heartbeat-interval=1000 \
+  --election-timeout=5000 \
+  --cert-file=/app/kelu/etcd/ssl/server.pem  \
+  --key-file=/app/kelu/etcd/ssl/server-key.pem  \
+  --peer-cert-file=/app/kelu/etcd/ssl/peer.pem  \
+  --peer-key-file=/app/kelu/etcd/ssl/peer-key.pem  \
+  --trusted-ca-file=/app/kelu/etcd/ssl/ca.pem  \
+  --peer-trusted-ca-file=/app/kelu/etcd/ssl/ca.pem  \
   --initial-advertise-peer-urls https://__ETCD_REPLACE_IP_2__:2380  \
   --listen-peer-urls https://__ETCD_REPLACE_IP_2__:2380  \
   --listen-client-urls https://__ETCD_REPLACE_IP_2__:2379,http://127.0.0.1:2379  \
@@ -25,7 +27,7 @@ ExecStart=/usr/bin/etcd \
   --initial-cluster-token etcd-cluster-0  \
   --initial-cluster node01=https://__ETCD_REPLACE_IP_1__:2380,node02=https://__ETCD_REPLACE_IP_2__:2380,node03=https://__ETCD_REPLACE_IP_3__:2380  \
   --initial-cluster-state new  \
-  --data-dir=/app/etcd/etcddata
+  --data-dir=/app/kelu/etcddata
 Restart=on-failure
 RestartSec=5
 LimitNOFILE=65536

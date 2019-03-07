@@ -12,6 +12,8 @@ EnvironmentFile=/app/kelu/etcd/etcd.conf
 User=root
 ExecStart=/usr/bin/etcd \
   --name node03  \
+  --heartbeat-interval=1000 \
+  --election-timeout=5000 \
   --cert-file=/app/kelu/etcd/ssl/server.pem  \
   --key-file=/app/kelu/etcd/ssl/server-key.pem  \
   --peer-cert-file=/app/kelu/etcd/ssl/peer.pem  \
