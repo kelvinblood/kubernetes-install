@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo3
+  labels:
+    nsname: demo3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busybox-deployment
+  namespace: demo3
+spec:
+  selector:
+    matchLabels:
+      app: busybox
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: busybox
+      annotations:
+        "cni.projectcalico.org/ipv4pools": "[\"demo3-ippool\"]"
+    spec:
+      containers:
+      - name: busybox
+        image: busybox:latest
+        command: [ "/bin/sh" ]
+        tty: true
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-test
+  namespace: demo3
+spec:
+  selector:
+    matchLabels:
+      app: nginx-test
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx-test
+      annotations:
+        "cni.projectcalico.org/ipv4pools": "[\"demo3-ippool\"]"
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  annotations:
+    "cni.projectcalico.org/ipv4pools": "[\"demo3-ippool\"]"
+  labels:
+    app: nginx-test
+  name: nginx-test
+  namespace: demo3
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 80
+    nodePort: 32005
+  selector:
+    app: nginx-test

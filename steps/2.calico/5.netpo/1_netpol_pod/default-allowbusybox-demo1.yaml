@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-busybox
+  namespace: demo1
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx-test
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: busybox
+    ports:
+    - protocol: TCP
+      port: 80

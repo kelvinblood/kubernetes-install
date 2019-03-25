@@ -1,0 +1,26 @@
+#apiVersion: projectcalico.org/v3
+#kind: BGPPeer
+#metadata:
+#  name: bgppeer-node-0053
+#spec:
+#  peerIP: 10.19.0.53
+#  node: rqcicddev03
+#  asNumber: 64567
+#---
+apiVersion: projectcalico.org/v3
+kind: BGPPeer
+metadata:
+  name: bgppeer-node-0054
+spec:
+  peerIP: 10.19.0.54
+  node: rqcicddev04
+  asNumber: 64567
+#---
+#apiVersion: projectcalico.org/v3
+#kind: BGPPeer
+#metadata:
+#  name: bgppeer-node-unicom-0112
+#spec:
+#  peerIP: 10.18.1.12
+#  node: k8s002
+#  asNumber: 64567

@@ -1,0 +1,12 @@
+apiVersion: projectcalico.org/v3
+kind: IPPool
+metadata:
+  creationTimestamp: 2019-03-11T08:02:18Z
+  name: default-ipv4-ippool
+  resourceVersion: "40"
+  uid: fdc21bd3-43d3-11e9-aaa4-286ed488ca53
+spec:
+  blockSize: 26
+  cidr: 172.18.0.0/16
+  ipipMode: Never
+  natOutgoing: false

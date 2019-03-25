@@ -1,0 +1,25 @@
+apiVersion: projectcalico.org/v3
+kind: Node
+metadata:
+  name: rqkubedev06
+  labels:
+    i-am-a-route-reflector: true
+spec:
+  bgp:
+    ipv4Address: 10.19.0.60/16
+    routeReflectorClusterID: 224.0.0.1
+  orchRefs:
+  - nodeName: rqkubedev06
+    orchestrator: k8s
+---
+apiVersion: projectcalico.org/v3
+kind: Node
+metadata:
+  name: rqcicddev04
+spec:
+  bgp:
+    ipv4Address: 10.19.0.54/16
+    routeReflectorClusterID: 224.0.0.1
+  orchRefs:
+  - nodeName: rqcicddev04
+    orchestrator: k8s

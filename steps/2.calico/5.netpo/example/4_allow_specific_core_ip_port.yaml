@@ -1,0 +1,18 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-core-specific-ip-port
+  namespace: demo1
+spec:
+  podSelector:
+    matchLabels:
+      app: nginx-test
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.18.1.230/32
+    ports:
+    - protocol: TCP
+      port: 80
+  policyTypes:
+  - Egress
