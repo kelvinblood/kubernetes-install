@@ -1,0 +1,14 @@
+apiVersion: projectcalico.org/v3
+kind: Node
+metadata:
+  labels:
+    i-am-a-route-reflector: true
+  creationTimestamp: null
+  name: k8s002
+spec:
+  bgp:
+    ipv4Address: 10.18.1.12/16
+    routeReflectorClusterID: 224.0.0.1
+  orchRefs:
+  - nodeName: k8s002
+    orchestrator: k8s
